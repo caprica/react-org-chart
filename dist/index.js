@@ -92,15 +92,15 @@ var Node = function (_Component2) {
 
             var allChildren = _react2.default.Children.toArray(this.props.children);
             var childNodes = allChildren.filter(function (child) {
-                return child.type && child.type.name === Node.TAG;
+                return child.type === NodeType;
             });
             var adjunct = allChildren.filter(function (child) {
-                return child.type && child.type.name === Adjunct.TAG;
+                return child.type === AdjunctType;
             }).find(function () {
                 return true;
             });
             var content = allChildren.filter(function (child) {
-                return !child.type || child.type.name !== Node.TAG && child.type.name !== Adjunct.TAG;
+                return !child.type || child.type !== NodeType && child.type !== AdjunctType;
             });
             var childCount = childNodes.length;
             var hasChildren = childCount > 0;
@@ -209,7 +209,7 @@ var Node = function (_Component2) {
     return Node;
 }(_react.Component);
 
-Node.TAG = 'Node';
+var NodeType = _react2.default.createElement(Node, null).type;
 
 var Adjunct = function (_Component3) {
     _inherits(Adjunct, _Component3);
@@ -258,7 +258,7 @@ var Adjunct = function (_Component3) {
     return Adjunct;
 }(_react.Component);
 
-Adjunct.TAG = 'Adjunct';
+var AdjunctType = _react2.default.createElement(Adjunct, null).type;
 
 OrgChart.Node = Node;
 OrgChart.Adjunct = Adjunct;
