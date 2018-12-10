@@ -56,9 +56,9 @@ class Node extends Component {
 
     render() {
         const allChildren   = React.Children.toArray(this.props.children)
-        const childNodes    = allChildren.filter(child => child.type && child.type.name === Node.TAG)
-        const adjunct       = allChildren.filter(child => child.type && child.type.name === Adjunct.TAG).find(() => true)
-        const content       = allChildren.filter(child => !child.type || (child.type.name !== Node.TAG && child.type.name !== Adjunct.TAG))
+        const childNodes    = allChildren.filter(child => child.type === NodeType)
+        const adjunct       = allChildren.filter(child => child.type === AdjunctType).find(() => true)
+        const content       = allChildren.filter(child => !child.type || (child.type !== NodeType && child.type !== AdjunctType))
         const childCount    = childNodes.length
         const hasChildren   = childCount > 0
         const level         = this.props.level || 0
@@ -136,7 +136,7 @@ class Node extends Component {
     }
 }
 
-Node.TAG = 'Node'
+const NodeType = (<Node/>).type
 
 class Adjunct extends Component {
 
@@ -166,7 +166,7 @@ class Adjunct extends Component {
 
 }
 
-Adjunct.TAG = 'Adjunct'
+const AdjunctType = (<Adjunct/>).type
 
 OrgChart.Node    = Node
 OrgChart.Adjunct = Adjunct
