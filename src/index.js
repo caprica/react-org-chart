@@ -6,9 +6,6 @@
 
 import React, { Component, Fragment } from 'react'
 
-const ADJUNCT_TYPE = 'Adjunct'
-const NODE_TYPE    = 'Node'
-
 import './styles.css'
 
 const dataAttributes = (props) => {
@@ -59,9 +56,9 @@ class Node extends Component {
 
     render() {
         const allChildren   = React.Children.toArray(this.props.children)
-        const childNodes    = allChildren.filter(child => child.type && child.type.name === NODE_TYPE)
-        const adjunct       = allChildren.filter(child => child.type && child.type.name === ADJUNCT_TYPE).find(() => true)
-        const content       = allChildren.filter(child => !child.type || (child.type.name !== NODE_TYPE && child.type.name !== ADJUNCT_TYPE))
+        const childNodes    = allChildren.filter(child => child.type && child.type.name === Node.TAG)
+        const adjunct       = allChildren.filter(child => child.type && child.type.name === Adjunct.TAG).find(() => true)
+        const content       = allChildren.filter(child => !child.type || (child.type.name !== Node.TAG && child.type.name !== Adjunct.TAG))
         const childCount    = childNodes.length
         const hasChildren   = childCount > 0
         const level         = this.props.level || 0
@@ -139,6 +136,8 @@ class Node extends Component {
     }
 }
 
+Node.TAG = 'Node'
+
 class Adjunct extends Component {
 
     constructor(props) {
@@ -166,6 +165,8 @@ class Adjunct extends Component {
     }
 
 }
+
+Adjunct.TAG = 'Adjunct'
 
 OrgChart.Node    = Node
 OrgChart.Adjunct = Adjunct
