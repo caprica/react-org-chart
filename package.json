@@ -1,5 +1,5 @@
 {
-  "name": "react-org-chart",
+  "name": "@capricasoftware/react-org-chart",
   "version": "0.1.0",
   "description": "Simple hierarchical organisation chart component for ReactJS",
   "main": "dist/index.js",
