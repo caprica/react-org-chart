@@ -26,9 +26,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * Copyright 2018 Caprica Software Limited.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
-var ADJUNCT_TYPE = 'Adjunct';
-var NODE_TYPE = 'Node';
-
 var dataAttributes = function dataAttributes(props) {
     return Object.keys(props).reduce(function (res, name) {
         if (name.startsWith('data-')) {
@@ -95,15 +92,15 @@ var Node = function (_Component2) {
 
             var allChildren = _react2.default.Children.toArray(this.props.children);
             var childNodes = allChildren.filter(function (child) {
-                return child.type && child.type.name === NODE_TYPE;
+                return child.type && child.type.name === Node.TAG;
             });
             var adjunct = allChildren.filter(function (child) {
-                return child.type && child.type.name === ADJUNCT_TYPE;
+                return child.type && child.type.name === Adjunct.TAG;
             }).find(function () {
                 return true;
             });
             var content = allChildren.filter(function (child) {
-                return !child.type || child.type.name !== NODE_TYPE && child.type.name !== ADJUNCT_TYPE;
+                return !child.type || child.type.name !== Node.TAG && child.type.name !== Adjunct.TAG;
             });
             var childCount = childNodes.length;
             var hasChildren = childCount > 0;
@@ -212,6 +209,8 @@ var Node = function (_Component2) {
     return Node;
 }(_react.Component);
 
+Node.TAG = 'Node';
+
 var Adjunct = function (_Component3) {
     _inherits(Adjunct, _Component3);
 
@@ -258,6 +257,8 @@ var Adjunct = function (_Component3) {
 
     return Adjunct;
 }(_react.Component);
+
+Adjunct.TAG = 'Adjunct';
 
 OrgChart.Node = Node;
 OrgChart.Adjunct = Adjunct;
